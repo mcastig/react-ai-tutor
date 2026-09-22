@@ -1,0 +1,542 @@
+/* ── Panel shell ─────────────────────────────────────────────────────── */
+
+.panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 22px;
+  scroll-behavior: smooth;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 20px;
+  /* `overflow: hidden` clips the watermark, but it also zeroes this item's
+     automatic minimum size — without `flex: none` a short viewport crushes
+     the card instead of letting the log scroll. */
+  flex: none;
+  overflow: hidden;
+  border: 1px solid var(--signal-edge);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(130% 150% at 0% 0%, rgba(46, 227, 196, 0.11), transparent 62%),
+    #0b1820;
+}
+
+.heroIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--signal-edge);
+  border-radius: 12px;
+  background: var(--signal-wash);
+  color: var(--signal);
+}
+
+.heroIconGlyph {
+  width: 21px;
+  height: 21px;
+}
+
+.heroBody {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.heroText {
+  max-width: 64ch;
+  margin-top: 7px;
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: #0e1a22;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition:
+    border-color 0.16s var(--ease),
+    color 0.16s var(--ease),
+    background 0.16s var(--ease),
+    transform 0.16s var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--signal-edge);
+  background: var(--signal-wash);
+  color: var(--signal);
+  transform: translateY(-1px);
+}
+
+.chipIcon {
+  width: 13px;
+  height: 13px;
+  color: var(--signal);
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  right: -46px;
+  width: 190px;
+  height: 190px;
+  color: var(--signal);
+  opacity: 0.04;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ── Message log ─────────────────────────────────────────────────────── */
+
+.log {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  gap: 16px;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  animation: rise 0.34s var(--ease) both;
+}
+
+.rowUser {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: end;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--signal-ink);
+  background: linear-gradient(145deg, var(--beam), var(--signal));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.avatarGlyph {
+  width: 19px;
+  height: 19px;
+}
+
+.bubble {
+  max-width: 76ch;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0e171f;
+}
+
+.bubbleUser {
+  border-color: var(--signal-edge);
+  background: linear-gradient(
+    180deg,
+    rgba(46, 227, 196, 0.09),
+    rgba(46, 227, 196, 0.035)
+  );
+}
+
+.bubbleHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.author {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.time {
+  margin-left: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.body {
+  font-size: 14px;
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+
+/* ── Markdown ────────────────────────────────────────────────────────── */
+
+.mdP {
+  margin-top: 10px;
+}
+
+.mdP:first-child {
+  margin-top: 0;
+}
+
+.mdStrong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.mdCode {
+  padding: 1px 5px;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  background: var(--raise-hi);
+  font-family: var(--font-mono), monospace;
+  font-size: 12.3px;
+  color: #7fd8c6;
+}
+
+.mdList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 11px;
+  list-style: none;
+}
+
+.mdItem {
+  position: relative;
+  padding-left: 17px;
+}
+
+.mdItem::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--signal);
+  opacity: 0.7;
+}
+
+.mdPre {
+  position: relative;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #08111a;
+  overflow: hidden;
+}
+
+.mdLang {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.mdCodeBlock {
+  display: block;
+  padding: 13px 15px;
+  overflow-x: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 12.3px;
+  line-height: 1.68;
+  color: #c6dae7;
+  white-space: pre;
+}
+
+/* ── Citations: the grounding receipt ────────────────────────────────── */
+
+.cites {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+.citesLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.cite {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: #0c151d;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  color: var(--ink-2);
+}
+
+.citeIcon {
+  width: 11px;
+  height: 11px;
+  color: var(--faint);
+}
+
+.citeSection {
+  color: var(--faint);
+}
+
+.citeScore {
+  margin-left: auto;
+  padding-left: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  color: var(--signal);
+}
+
+/* ── Retrieval trace ─────────────────────────────────────────────────── */
+
+.traceCard {
+  width: 100%;
+  max-width: 340px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0b141c;
+}
+
+.traceHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--mute);
+}
+
+.cursor {
+  display: inline-block;
+  width: 6px;
+  height: 11px;
+  background: var(--signal);
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.traceList {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.traceRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  gap: 10px;
+  align-items: center;
+}
+
+.traceFile {
+  overflow: hidden;
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  color: var(--faint);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.traceBar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.traceFill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--signal-deep), var(--signal));
+  animation: scan 0.5s var(--ease) forwards;
+  animation-delay: calc(var(--i) * 110ms);
+}
+
+@keyframes scan {
+  to {
+    width: var(--w);
+  }
+}
+
+/* ── Composer ────────────────────────────────────────────────────────── */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.composer {
+  display: flex;
+  gap: 10px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+  background: rgba(8, 14, 19, 0.72);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0a131a;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.input::placeholder {
+  color: var(--faint);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--signal);
+  box-shadow: 0 0 0 3px var(--signal-wash);
+}
+
+.send {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 0 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(140deg, var(--signal), var(--signal-deep));
+  color: var(--signal-ink);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 22px -14px var(--signal);
+  transition:
+    filter 0.14s var(--ease),
+    transform 0.14s var(--ease);
+}
+
+.send:hover:not(:disabled) {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.send:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.sendIcon {
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Narrow viewports ────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .scroll {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .watermark {
+    display: none;
+  }
+
+  .chip {
+    font-size: 12px;
+  }
+
+  .composer {
+    padding: 12px;
+  }
+
+  .send {
+    padding: 0 15px;
+  }
+}
