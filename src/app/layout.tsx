@@ -25,9 +25,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DevTutor Bot — Angular & TypeScript AI Mentor",
+  title: "DevTutor Bot — Mentor IA de Angular y TypeScript",
   description:
-    "Ask about Angular 18 signals, standalone routing, RxJS interop, and TypeScript generics. Every answer is grounded in the indexed markdown corpus.",
+    "Pregunta sobre signals de Angular 18, rutas standalone, interoperabilidad con RxJS y genéricos de TypeScript. Cada respuesta se fundamenta en el corpus markdown indexado.",
 };
 
 export const viewport: Viewport = {
@@ -37,7 +37,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <body>{children}</body>

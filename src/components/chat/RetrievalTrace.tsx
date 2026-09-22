@@ -18,7 +18,7 @@ export function RetrievalTrace({ scores }: { scores: readonly ScoredDoc[] }) {
 
       <div className={styles.traceCard}>
         <p className={styles.traceHead}>
-          scanning {scores.length} indexed docs
+          analizando {scores.length} docs indexados
           <span className={styles.cursor} />
         </p>
 

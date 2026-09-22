@@ -6,10 +6,10 @@ import { SparkIcon } from "@/components/icons";
 import styles from "./chat.module.css";
 
 const QUESTIONS = [
-  "How to use Angular Signals?",
-  "Explain TypeScript Generics",
-  "Standalone Components routing",
-  "RxJS toSignal migration guide",
+  "¿Cómo se usan los Signals de Angular?",
+  "Explica los genéricos de TypeScript",
+  "Rutas con componentes standalone",
+  "Guía de migración a toSignal de RxJS",
 ];
 
 const WATERMARK = (
@@ -46,12 +46,13 @@ function WelcomeCardBase({ onPick }: { onPick: (question: string) => void }) {
 
       <div className={styles.heroBody}>
         <h2 id="hero-title" className={styles.heroTitle}>
-          DevTutor Llama RAG Assistant
+          Asistente RAG DevTutor Llama
         </h2>
         <p className={styles.heroText}>
-          Ask any question about Angular 18+ Signals, Standalone APIs, RxJS
-          Interop, or advanced TypeScript generics. Responses are grounded
-          directly in our verified markdown knowledge base.
+          Pregunta lo que quieras sobre Signals de Angular 18+, APIs standalone,
+          interoperabilidad con RxJS o genéricos avanzados de TypeScript. Las
+          respuestas se fundamentan directamente en nuestra base de conocimiento
+          en markdown.
         </p>
 
         <div className={styles.chips}>

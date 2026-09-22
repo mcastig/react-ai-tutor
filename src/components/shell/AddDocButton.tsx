@@ -24,7 +24,7 @@ export function AddDocButton() {
       if (file === undefined) return;
 
       if (file.size > MAX_BYTES) {
-        setProblem("File is over 500 KB — split it and add the part you need.");
+        setProblem("El archivo supera los 500 KB: divídelo y añade la parte que necesites.");
         return;
       }
 
@@ -39,7 +39,7 @@ export function AddDocButton() {
       <span className={styles.addDocNote} role="status">
         {problem !== "" ? problem : null}
         {problem === "" && lastAdded !== null
-          ? `indexed ${lastAdded.file}`
+          ? `indexado ${lastAdded.file}`
           : null}
       </span>
 
@@ -55,7 +55,7 @@ export function AddDocButton() {
 
       <button type="button" className={styles.addDoc} onClick={openPicker}>
         <UploadIcon className={styles.addDocIcon} />
-        Add Doc
+        Añadir doc
       </button>
     </div>
   );

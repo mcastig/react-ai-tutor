@@ -19,7 +19,7 @@ export const SAMPLE_EVAL_RUNS: readonly EvalRun[] = [
   {
     id: "r4",
     label: "ng18-lora-r16",
-    date: "Mar 14",
+    date: "14 mar",
     loss: 0.7118,
     grounded: 0.94,
     steps: 1800,
@@ -27,7 +27,7 @@ export const SAMPLE_EVAL_RUNS: readonly EvalRun[] = [
   {
     id: "r3",
     label: "ng18-lora-r8",
-    date: "Mar 11",
+    date: "11 mar",
     loss: 0.8306,
     grounded: 0.9,
     steps: 1200,
@@ -35,7 +35,7 @@ export const SAMPLE_EVAL_RUNS: readonly EvalRun[] = [
   {
     id: "r2",
     label: "ts54-mix",
-    date: "Mar 6",
+    date: "6 mar",
     loss: 0.9041,
     grounded: 0.86,
     steps: 900,
@@ -43,7 +43,7 @@ export const SAMPLE_EVAL_RUNS: readonly EvalRun[] = [
   {
     id: "r1",
     label: "base-8b-instruct",
-    date: "Mar 2",
+    date: "2 mar",
     loss: 0.917,
     grounded: 0.71,
     steps: 0,

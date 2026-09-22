@@ -19,7 +19,7 @@ export function NavList() {
   );
 
   return (
-    <nav className={styles.nav} aria-label="Workspace">
+    <nav className={styles.nav} aria-label="Espacio de trabajo">
       <button
         type="button"
         data-view="chat"
@@ -32,8 +32,8 @@ export function NavList() {
         }
       >
         <ChatIcon className={styles.navIcon} />
-        <span className={styles.navLabel}>Chat Tutor</span>
-        <span className={`${styles.badge} ${styles.badgeSignal}`}>Live RAG</span>
+        <span className={styles.navLabel}>Tutor de chat</span>
+        <span className={`${styles.badge} ${styles.badgeSignal}`}>RAG activo</span>
       </button>
 
       <button
@@ -48,7 +48,7 @@ export function NavList() {
         }
       >
         <BookIcon className={styles.navIcon} />
-        <span className={styles.navLabel}>RAG Knowledge Base</span>
+        <span className={styles.navLabel}>Base de conocimiento</span>
         <span className={styles.badge}>{docs.length} docs</span>
       </button>
 
@@ -64,10 +64,10 @@ export function NavList() {
         }
       >
         <GaugeIcon className={styles.navIcon} />
-        <span className={styles.navLabel}>Fine-Tuning &amp; Eval</span>
+        <span className={styles.navLabel}>Ajuste y evaluación</span>
         <span
           className={`${styles.badge} ${styles.badgeSignal}`}
-          title="Eval loss against the base model"
+          title="Pérdida de evaluación frente al modelo base"
         >
           {LOSS_DELTA}
         </span>

@@ -8,43 +8,43 @@ export function EvalPanel() {
   return (
     <div className={styles.view}>
       <header className={styles.viewHead}>
-        <h2 className={styles.viewTitle}>Adapter runs</h2>
+        <h2 className={styles.viewTitle}>Ejecuciones de adaptadores</h2>
         <p className={styles.viewLead}>
-          LoRA adapters trained on the Angular 18 and TypeScript 5.4 corpus,
-          measured against the base instruct model.
+          Adaptadores LoRA entrenados con el corpus de Angular 18 y TypeScript
+          5.4, medidos frente al modelo instruct base.
         </p>
       </header>
 
       <div className={styles.stats}>
         <div className={styles.stat}>
-          <p className={styles.statLabel}>Eval loss</p>
+          <p className={styles.statLabel}>Pérdida de eval.</p>
           <p className={styles.statValue}>{latest.loss.toFixed(4)}</p>
           <p className={styles.statFoot}>{latest.label}</p>
         </div>
         <div className={styles.stat}>
-          <p className={styles.statLabel}>Against base</p>
+          <p className={styles.statLabel}>Frente al base</p>
           <p className={`${styles.statValue} ${styles.statValueSignal}`}>
             {LOSS_DELTA}
           </p>
-          <p className={styles.statFoot}>base-8b-instruct, Mar 2</p>
+          <p className={styles.statFoot}>base-8b-instruct, 2 mar</p>
         </div>
         <div className={styles.stat}>
-          <p className={styles.statLabel}>Grounded answers</p>
+          <p className={styles.statLabel}>Respuestas fundamentadas</p>
           <p className={styles.statValue}>
             {Math.round(latest.grounded * 100)}%
           </p>
-          <p className={styles.statFoot}>graded on 250 held-out questions</p>
+          <p className={styles.statFoot}>evaluadas en 250 preguntas reservadas</p>
         </div>
         <div className={styles.stat}>
-          <p className={styles.statLabel}>Steps</p>
+          <p className={styles.statLabel}>Pasos</p>
           <p className={styles.statValue}>
-            {latest.steps.toLocaleString("en-US")}
+            {latest.steps.toLocaleString("es-MX")}
           </p>
-          <p className={styles.statFoot}>rank 16, batch 8</p>
+          <p className={styles.statFoot}>rango 16, lote 8</p>
         </div>
       </div>
 
-      <p className={styles.runsLabel}>Loss by run — shorter is better</p>
+      <p className={styles.runsLabel}>Pérdida por ejecución: más corto es mejor</p>
       <ul className={styles.runs}>
         {SAMPLE_EVAL_RUNS.map((run, index) => (
           <li
@@ -70,8 +70,8 @@ export function EvalPanel() {
       </ul>
 
       <p className={styles.note}>
-        Sample metrics from recorded runs. This view does not poll a live
-        training job.
+        Métricas de muestra de ejecuciones registradas. Esta vista no consulta
+        ningún entrenamiento en curso.
       </p>
     </div>
   );

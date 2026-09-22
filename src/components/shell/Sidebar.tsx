@@ -14,7 +14,7 @@ export function Sidebar() {
             <span className={styles.brandName}>DevTutor Bot</span>
             <span className={styles.badge}>Llama 3</span>
           </div>
-          <p className={styles.brandTag}>Angular &amp; TypeScript AI Mentor</p>
+          <p className={styles.brandTag}>Mentor IA de Angular y TypeScript</p>
         </div>
       </div>
 
@@ -25,14 +25,14 @@ export function Sidebar() {
       <div className={styles.engine}>
         <div className={styles.engineTop}>
           <span className={styles.dot} />
-          <span className={styles.engineName}>Llama 3 + RAG Engine</span>
+          <span className={styles.engineName}>Motor Llama 3 + RAG</span>
           <span className={styles.engineVersion}>v1.8.4</span>
         </div>
         <p className={styles.engineBody}>
-          Corpus indexed:{" "}
-          <span className={styles.engineStrong}>Angular 18 &amp; TS 5.4</span>
+          Corpus indexado:{" "}
+          <span className={styles.engineStrong}>Angular 18 y TS 5.4</span>
           <br />
-          Retrieval runs on-device, in this tab.
+          La recuperación se ejecuta en esta pestaña.
         </p>
       </div>
     </aside>

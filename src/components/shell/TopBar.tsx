@@ -6,9 +6,9 @@ import { AddDocButton } from "./AddDocButton";
 import styles from "./shell.module.css";
 
 const CRUMB: Record<View, string> = {
-  chat: "Interactive Chat Tutor",
-  knowledge: "RAG Knowledge Base",
-  eval: "Fine-Tuning & Eval",
+  chat: "Tutor de chat interactivo",
+  knowledge: "Base de conocimiento RAG",
+  eval: "Ajuste y evaluación",
 };
 
 export function TopBar() {
@@ -16,12 +16,12 @@ export function TopBar() {
 
   return (
     <header className={styles.topbar}>
-      <span className={styles.crumbPill}>Active Mode</span>
+      <span className={styles.crumbPill}>Modo activo</span>
       <CaretIcon className={styles.caret} />
       <h1 className={styles.crumbCurrent}>{CRUMB[view]}</h1>
       <span className={styles.crumbMeta}>
         <ChipIcon className={styles.crumbMetaIcon} />
-        Model: Llama-3-8B-Instruct
+        Modelo: Llama-3-8B-Instruct
       </span>
       <AddDocButton />
     </header>

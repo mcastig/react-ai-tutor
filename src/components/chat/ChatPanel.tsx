@@ -75,7 +75,7 @@ export function ChatPanel() {
           role="log"
           aria-live="polite"
           aria-busy={retrieving}
-          aria-label="Conversation"
+          aria-label="Conversación"
         >
           {messages.map((message) => (
             <MessageItem key={message.id} message={message} />
