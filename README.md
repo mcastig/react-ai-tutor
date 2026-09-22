@@ -1,110 +1,128 @@
 # DevTutor Bot
 
-An Angular & TypeScript mentor interface: a chat tutor whose answers are
-grounded in an indexed markdown corpus, alongside views for the knowledge base
-and adapter eval runs.
+Una interfaz de mentoría para Angular y TypeScript: un tutor de chat cuyas
+respuestas se fundamentan en un corpus markdown indexado, con vistas para la
+base de conocimiento y las ejecuciones de evaluación.
 
-Built on Next.js 16 (App Router) and React 19 with CSS Modules.
+Construido sobre Next.js 16 (App Router) y React 19 con CSS Modules. La interfaz
+está en español; la recuperación entiende preguntas en español y en inglés.
 
-## Retrieval is local
+## La recuperación es local
 
-**No model is called.** Despite the Llama 3 branding in the UI, answers are not
-generated — they are retrieved from four markdown docs in
-[`src/lib/corpus.ts`](src/lib/corpus.ts) by lexical keyword matching, and
-returned verbatim. There is no API key, no backend, and no network request.
+**No se llama a ningún modelo.** A pesar de la marca Llama 3 en la interfaz, las
+respuestas no se generan: se recuperan de cuatro documentos markdown definidos
+en [`src/lib/corpus.ts`](src/lib/corpus.ts) mediante coincidencia léxica de
+palabras clave, y se devuelven tal cual. No hay clave de API, ni backend, ni
+ninguna petición de red.
 
-This is deliberate rather than a stub: the interface is built to *show* its
-grounding, and it can only honestly do that over a corpus it actually has. Every
-answer carries the sections it came from and a match score, and a question the
-corpus does not cover says so instead of inventing an answer.
+Esto es deliberado, no un apaño: la interfaz está construida para *mostrar* de
+dónde sale cada respuesta, y solo puede hacerlo con honestidad sobre un corpus
+que realmente tiene. Cada respuesta lleva las secciones de las que procede y una
+puntuación de coincidencia, y una pregunta que el corpus no cubre lo dice en
+lugar de inventarse la respuesta.
 
-If you wire this to a real model, the piece to keep is the citation contract —
-the UI promises grounding on every answer, so the generation path has to be able
-to produce it.
+Si conectas esto a un modelo real, lo que hay que conservar es el contrato de
+citación: la interfaz promete fundamentación en cada respuesta, así que la vía
+de generación tiene que poder producirla.
 
-## Getting started
+## Puesta en marcha
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000](http://localhost:3000).
 
-| Script | Does |
+| Script | Hace |
 | --- | --- |
-| `npm run dev` | Development server |
-| `npm run build` | Production build |
-| `npm start` | Serve the production build |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm start` | Sirve el build de producción |
 | `npm run lint` | ESLint |
 
-## The three views
+## Las tres vistas
 
-**Chat Tutor** — Ask a question, or pick one of the four suggestions. The
-retrieval trace fills a bar per indexed doc showing how much of the question
-landed in each, then the answer arrives with its source chunks.
+**Tutor de chat** — Haz una pregunta o elige una de las cuatro sugerencias. La
+traza de recuperación llena una barra por documento indexado mostrando cuánto de
+la pregunta cayó en cada uno, y después llega la respuesta con sus fragmentos de
+origen.
 
-**RAG Knowledge Base** — The indexed corpus: each doc's file, sections, and
-summary, including anything added at runtime.
+**Base de conocimiento** — El corpus indexado: archivo, secciones y resumen de
+cada documento, incluidos los que añadas en caliente.
 
-**Fine-Tuning & Eval** — Adapter run metrics. This data is static sample data
-from [`src/lib/eval-runs.ts`](src/lib/eval-runs.ts); it does not poll a training
-job. The headline delta is computed from the runs, so the sidebar badge and the
-table cannot disagree.
+**Ajuste y evaluación** — Métricas de los adaptadores. Son datos de muestra
+estáticos de [`src/lib/eval-runs.ts`](src/lib/eval-runs.ts); no consultan ningún
+entrenamiento en curso. El delta destacado se calcula a partir de las
+ejecuciones, así que la insignia de la barra lateral y la tabla no pueden
+contradecirse.
 
-Chat stays mounted behind React's `Activity` while you are in another view, so
-switching does not discard the conversation.
+El chat sigue montado detrás de `Activity` de React mientras estás en otra
+vista, así que cambiar de vista no descarta la conversación.
 
-## Adding a doc
+## Recuperación bilingüe
 
-**Add Doc** in the top bar indexes a `.md` or `.txt` file (up to 500 KB) into the
-session corpus. It becomes retrievable immediately and appears in the knowledge
-base. Terms are derived from repeated words and the filename.
+Las preguntas se normalizan quitando acentos antes de tokenizarlas, así que
+«genéricos» y «genericos» son el mismo token y la «ñ» sobrevive como «n». Cada
+documento indexa términos en los dos idiomas, y los plurales se resuelven
+probando a quitar `-es` y `-s`.
 
-This lives in memory only — a refresh returns you to the four built-in docs. To
-add one permanently, append a `CorpusDoc` to `INDEXED_CORPUS` in
-[`src/lib/corpus.ts`](src/lib/corpus.ts) with the terms that should route a
-question to it.
+Esto importa si traduces la interfaz: una interfaz en un idioma con términos
+indexados en otro parece funcionar hasta que alguien escribe una pregunta real.
 
-## Layout
+## Añadir un documento
+
+**Añadir doc** en la barra superior indexa un archivo `.md` o `.txt` (hasta
+500 KB) en el corpus de la sesión. Queda consultable de inmediato y aparece en la
+base de conocimiento. Los términos salen de las palabras repetidas y del nombre
+del archivo.
+
+Esto vive solo en memoria: al recargar vuelves a los cuatro documentos de
+partida. Para añadir uno de forma permanente, agrega un `CorpusDoc` a
+`INDEXED_CORPUS` en [`src/lib/corpus.ts`](src/lib/corpus.ts) con los términos que
+deban encaminar una pregunta hacia él.
+
+## Estructura
 
 ```
 src/
-  app/            layout (fonts, tokens), page shell, global CSS
+  app/            layout (fuentes, tokens), shell de página, CSS global
   lib/
-    corpus.ts     the four docs + lexical retrieval
-    chat.ts       message model, timestamps, answer construction
-    markdown.ts   small markdown reader (paragraphs, bullets, fenced code)
-    eval-runs.ts  sample adapter metrics
+    corpus.ts     los cuatro documentos + recuperación léxica
+    chat.ts       modelo de mensajes, marcas de tiempo, construcción de respuestas
+    markdown.ts   lector de markdown reducido (párrafos, listas, bloques de código)
+    eval-runs.ts  métricas de muestra de los adaptadores
   components/
-    providers.tsx corpus + active view state
-    shell/        sidebar, top bar, Add Doc
-    chat/         chat panel, composer, messages, retrieval trace
-    panels/       view switch, knowledge base, eval
+    providers.tsx estado del corpus y de la vista activa
+    shell/        barra lateral, barra superior, Añadir doc
+    chat/         panel de chat, redactor, mensajes, traza de recuperación
+    panels/       conmutador de vistas, base de conocimiento, evaluación
 ```
 
-Server components render what they can: the sidebar shell and the entire eval
-view are server-rendered, the latter passed through the client boundary as a
-prop so it ships no client JavaScript. Client islands are kept to the parts that
-actually hold state.
+Los componentes de servidor renderizan todo lo que pueden: la estructura de la
+barra lateral y la vista de evaluación entera se renderizan en el servidor, y
+esta última se pasa como prop a través de la frontera de cliente para que no
+envíe nada de JavaScript. Las islas de cliente se limitan a lo que realmente
+guarda estado.
 
-## Design notes
+## Notas de diseño
 
-Three typefaces, each carrying a role rather than decorating:
+Tres tipografías, cada una con un papel en lugar de decorar:
 
-- **Sora** — the product voice (brand, headings)
-- **Manrope** — the mentor voice (prose, answers)
-- **JetBrains Mono** — the machine voice (model IDs, versions, citations, traces)
+- **Sora** — la voz del producto (marca, titulares)
+- **Manrope** — la voz del mentor (prosa, respuestas)
+- **JetBrains Mono** — la voz de la máquina (modelos, versiones, citas, trazas)
 
-Tokens live at the top of [`src/app/globals.css`](src/app/globals.css). A single
-teal accent is spent almost entirely on the retrieval trace and its citations;
-everything else stays quiet.
+Los tokens están al principio de
+[`src/app/globals.css`](src/app/globals.css). El único color de acento, el verde
+azulado, se gasta casi entero en la traza de recuperación y sus citas; todo lo
+demás se mantiene callado.
 
-### One CSS trap worth knowing
+### Una trampa de CSS que conviene conocer
 
-`.hero` carries `overflow: hidden` to clip its watermark, which zeroes a flex
-item's automatic minimum size. Without the explicit `flex: none`, a short
-viewport crushes the card instead of letting the log scroll. The same guard is
-on `.log`. Both are commented in
-[`chat.module.css`](src/components/chat/chat.module.css) — removing them
-silently reintroduces the bug, and only at short window heights.
+`.hero` lleva `overflow: hidden` para recortar su marca de agua, y eso anula el
+tamaño mínimo automático de un elemento flex. Sin el `flex: none` explícito, una
+ventana baja aplasta la tarjeta en lugar de dejar que el registro haga scroll.
+La misma protección está en `.log`. Ambas llevan comentario en
+[`chat.module.css`](src/components/chat/chat.module.css): quitarlas reintroduce
+el fallo en silencio, y solo con ventanas de poca altura.
