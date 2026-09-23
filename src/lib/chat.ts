@@ -20,8 +20,8 @@ export const NO_CITATIONS: readonly Citation[] = [];
 export const SEED_MESSAGE: ChatMessage = {
   id: "seed",
   role: "bot",
-  time: "Just now",
-  text: "👋 Hello developer! I'm **DevTutor Bot**, your AI mentor specialized in Angular & TypeScript, powered by Llama 3 and our RAG Knowledge Base. How can I assist your architecture today?",
+  time: "Ahora mismo",
+  text: "👋 ¡Hola, desarrollador! Soy **DevTutor Bot**, tu mentor de IA especializado en Angular y TypeScript, con Llama 3 y nuestra base de conocimiento RAG. ¿En qué puedo ayudarte hoy con tu arquitectura?",
   citations: NO_CITATIONS,
   match: 0,
 };
@@ -36,7 +36,7 @@ export function nextId(prefix: string): string {
   return `${prefix}-${sequence}`;
 }
 
-const TIME_FORMAT = new Intl.DateTimeFormat("en-US", {
+const TIME_FORMAT = new Intl.DateTimeFormat("es-MX", {
   hour: "numeric",
   minute: "2-digit",
 });

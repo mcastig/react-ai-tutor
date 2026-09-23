@@ -55,7 +55,7 @@ function ComposerBase({ onSend, busy, ref }: ComposerProps) {
   return (
     <form className={styles.composer} onSubmit={submit}>
       <label className={styles.srOnly} htmlFor="ask">
-        Ask DevTutor Bot a question
+        Hazle una pregunta a DevTutor Bot
       </label>
       <input
         id="ask"
@@ -65,14 +65,14 @@ function ComposerBase({ onSend, busy, ref }: ComposerProps) {
         onChange={change}
         disabled={busy}
         autoComplete="off"
-        placeholder="Ask about Angular Signals, Generics, Standalone routing..."
+        placeholder="Pregunta sobre Signals, genéricos, rutas standalone..."
       />
       <button
         type="submit"
         className={styles.send}
         disabled={busy || draft.trim() === ""}
       >
-        Send
+        Enviar
         <SendIcon className={styles.sendIcon} />
       </button>
     </form>

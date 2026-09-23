@@ -25,27 +25,18 @@ export type CorpusDoc = {
 const SIGNALS: CorpusDoc = {
   id: "signals",
   file: "angular-signals.md",
-  title: "Signals & the reactivity graph",
-  summary: "signal, computed, effect, and signal inputs in Angular 18.",
+  title: "Signals y el grafo de reactividad",
+  summary: "signal, computed, effect y las entradas signal en Angular 18.",
   origin: "indexed",
   terms: [
-    "angular",
-    "signal",
-    "signals",
-    "computed",
-    "effect",
-    "reactive",
-    "reactivity",
-    "state",
-    "set",
-    "update",
-    "input",
-    "change",
-    "detection",
+    "angular", "signal", "signals", "computed", "effect", "reactive",
+    "reactivity", "state", "set", "update", "input", "change", "detection",
     "zoneless",
+    "señal", "señales", "reactividad", "reactivo", "estado", "computado",
+    "cómputo", "efecto", "detección", "cambios", "entrada", "entradas",
   ],
   chunks: [{ section: "reactivity-graph" }, { section: "signal-inputs" }],
-  answer: `Signals are the reactive primitive Angular 18 builds on. \`signal()\` holds a value, \`computed()\` derives one lazily, and \`effect()\` syncs the graph with the world outside it.
+  answer: `Las signals son la primitiva reactiva sobre la que se construye Angular 18. \`signal()\` guarda un valor, \`computed()\` deriva uno de forma perezosa y \`effect()\` sincroniza el grafo con el mundo exterior.
 
 \`\`\`ts
 import { signal, computed, effect } from '@angular/core';
@@ -55,42 +46,32 @@ const visible = computed(() => items().filter(i => i.name.includes(filter())));
 
 effect(() => console.log('matches:', visible().length));
 
-filter.set('routing');          // replace the value
-filter.update(v => v.trim());   // derive from the previous one
+filter.set('routing');          // reemplaza el valor
+filter.update(v => v.trim());   // deriva del anterior
 \`\`\`
 
-- \`computed()\` is lazy and memoized. It recomputes only when a dependency it actually read during the last run has changed.
-- Never mutate an object in place. \`set()\` a new reference, or the graph never learns anything changed.
-- \`effect()\` is for logging, storage, and DOM work. Deriving state inside one is the most common signals mistake — that is what \`computed()\` is for.
-- \`input()\` and \`input.required<T>()\` replace \`@Input()\` and join the same graph, so a template that reads them needs no change detection help.`,
+- \`computed()\` es perezoso y memoizado: solo recalcula cuando cambia una dependencia que realmente leyó en la última ejecución.
+- Nunca mutes un objeto en el sitio. Asigna una referencia nueva con \`set()\`, o el grafo no se entera de que algo cambió.
+- \`effect()\` es para logging, almacenamiento y trabajo con el DOM. Derivar estado dentro de uno es el error más común con signals: para eso está \`computed()\`.
+- \`input()\` e \`input.required<T>()\` sustituyen a \`@Input()\` y se integran en el mismo grafo, así que una plantilla que los lee no necesita ayuda de la detección de cambios.`,
 };
 
 const ROUTING: CorpusDoc = {
   id: "routing",
   file: "standalone-routing.md",
-  title: "Standalone components & the router",
-  summary: "bootstrapApplication, provideRouter, lazy routes, functional guards.",
+  title: "Componentes standalone y el router",
+  summary: "bootstrapApplication, provideRouter, rutas perezosas y guards funcionales.",
   origin: "indexed",
   terms: [
-    "angular",
-    "standalone",
-    "routing",
-    "router",
-    "route",
-    "routes",
-    "navigation",
-    "bootstrap",
-    "lazy",
-    "guard",
-    "guards",
-    "ngmodule",
-    "module",
-    "modules",
-    "provider",
-    "providers",
+    "angular", "standalone", "routing", "router", "route", "routes",
+    "navigation", "bootstrap", "lazy", "guard", "guards", "ngmodule",
+    "module", "modules", "provider", "providers",
+    "ruta", "rutas", "enrutamiento", "navegación", "arranque", "arrancar",
+    "perezosa", "perezosas", "guardia", "guardias", "módulo", "módulos",
+    "proveedor", "proveedores",
   ],
   chunks: [{ section: "bootstrap" }, { section: "lazy-routes" }],
-  answer: `Standalone components drop NgModules entirely. The app bootstraps once and providers live in one readable list.
+  answer: `Los componentes standalone eliminan los NgModules por completo. La aplicación arranca una sola vez y los providers viven en una única lista legible.
 
 \`\`\`ts
 bootstrapApplication(App, {
@@ -101,7 +82,7 @@ bootstrapApplication(App, {
 });
 \`\`\`
 
-Routes lazy-load either a single component or a nested route array:
+Las rutas cargan de forma perezosa un componente suelto o un array de rutas anidadas:
 
 \`\`\`ts
 export const routes: Routes = [
@@ -117,42 +98,28 @@ export const routes: Routes = [
 ];
 \`\`\`
 
-- \`withComponentInputBinding()\` binds route params straight into \`input()\` signals, which retires most \`ActivatedRoute\` subscriptions.
-- Guards are plain functions: \`const isAdmin: CanMatchFn = () => inject(Auth).isAdmin();\`
-- Put \`providers\` on a route to scope a service to that subtree instead of the whole application.`,
+- \`withComponentInputBinding()\` enlaza los parámetros de ruta directamente con signals \`input()\`, lo que elimina casi todas las suscripciones a \`ActivatedRoute\`.
+- Los guards son funciones normales: \`const isAdmin: CanMatchFn = () => inject(Auth).isAdmin();\`
+- Pon \`providers\` en una ruta para limitar un servicio a ese subárbol en lugar de a toda la aplicación.`,
 };
 
 const INTEROP: CorpusDoc = {
   id: "interop",
   file: "rxjs-interop.md",
-  title: "RxJS interop",
-  summary: "toSignal, toObservable, and takeUntilDestroyed.",
+  title: "Interoperabilidad con RxJS",
+  summary: "toSignal, toObservable y takeUntilDestroyed.",
   origin: "indexed",
   terms: [
-    "angular",
-    "rxjs",
-    "tosignal",
-    "toobservable",
-    "observable",
-    "interop",
-    "subscribe",
-    "subscription",
-    "unsubscribe",
-    "stream",
-    "async",
-    "pipe",
-    "takeuntildestroyed",
-    "teardown",
-    "destroy",
-    "leak",
-    "memory",
-    "migration",
-    "migrate",
-    "debounce",
-    "switchmap",
+    "angular", "rxjs", "tosignal", "toobservable", "observable", "interop",
+    "subscribe", "subscription", "unsubscribe", "stream", "async", "pipe",
+    "takeuntildestroyed", "teardown", "destroy", "leak", "memory",
+    "migration", "migrate", "debounce", "switchmap",
+    "interoperabilidad", "suscripción", "suscripciones", "suscribir",
+    "desuscribir", "flujo", "flujos", "fuga", "fugas", "memoria",
+    "migración", "migrar", "destruir", "limpieza", "observables",
   ],
   chunks: [{ section: "to-signal" }, { section: "teardown" }],
-  answer: `\`@angular/core/rxjs-interop\` bridges both directions: \`toSignal()\` reads a stream, \`toObservable()\` feeds one.
+  answer: `\`@angular/core/rxjs-interop\` conecta en ambos sentidos: \`toSignal()\` lee un flujo y \`toObservable()\` alimenta uno.
 
 \`\`\`ts
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
@@ -168,37 +135,28 @@ readonly results = toSignal(
 );
 \`\`\`
 
-- \`toSignal()\` subscribes immediately and tears down with the injection context, so call it in a field initializer or constructor — not inside a lifecycle hook.
-- Pass \`initialValue\`, or \`requireSync: true\` when the source emits synchronously such as a \`BehaviorSubject\`. With neither, the signal type widens to include \`undefined\`.
-- For streams you own, \`takeUntilDestroyed()\` replaces the \`destroy$\` Subject boilerplate.
-- Migrate leaf-first: convert what the template reads, and leave the stream plumbing in RxJS where debouncing, retries, and cancellation still earn their keep.`,
+- \`toSignal()\` se suscribe de inmediato y se limpia junto con el contexto de inyección, así que llámalo al inicializar un campo o en el constructor, no dentro de un hook del ciclo de vida.
+- Pasa \`initialValue\`, o \`requireSync: true\` cuando la fuente emite de forma síncrona, como un \`BehaviorSubject\`. Sin ninguno de los dos, el tipo de la signal se amplía para incluir \`undefined\`.
+- Para los flujos que tú controlas, \`takeUntilDestroyed()\` sustituye al típico Subject \`destroy$\`.
+- Migra desde las hojas hacia dentro: convierte lo que lee la plantilla y deja la fontanería de flujos en RxJS, donde el debounce, los reintentos y la cancelación siguen valiendo la pena.`,
 };
 
 const GENERICS: CorpusDoc = {
   id: "generics",
   file: "typescript-generics.md",
-  title: "Generics in TypeScript 5.4",
-  summary: "Constraints, keyof, satisfies, and NoInfer.",
+  title: "Genéricos en TypeScript 5.4",
+  summary: "Restricciones, keyof, satisfies y NoInfer.",
   origin: "indexed",
   terms: [
-    "typescript",
-    "ts",
-    "generic",
-    "generics",
-    "type",
-    "types",
-    "keyof",
-    "constraint",
-    "constraints",
-    "infer",
-    "noinfer",
-    "satisfies",
-    "conditional",
-    "inference",
-    "extends",
+    "typescript", "ts", "generic", "generics", "type", "types", "keyof",
+    "constraint", "constraints", "infer", "noinfer", "satisfies",
+    "conditional", "inference", "extends",
+    "genérico", "genéricos", "tipo", "tipos", "restricción", "restricciones",
+    "inferencia", "inferir", "condicional", "condicionales", "parámetro",
+    "parámetros",
   ],
   chunks: [{ section: "constraints" }, { section: "inference-control" }],
-  answer: `Generics are functions over types. The ones worth writing constrain their parameters so the compiler can infer everything else.
+  answer: `Los genéricos son funciones sobre tipos. Los que merece la pena escribir restringen sus parámetros para que el compilador pueda inferir todo lo demás.
 
 \`\`\`ts
 function pluck<T, K extends keyof T>(rows: readonly T[], key: K): T[K][] {
@@ -208,10 +166,10 @@ function pluck<T, K extends keyof T>(rows: readonly T[], key: K): T[K][] {
 const names = pluck(users, 'name'); // string[]
 \`\`\`
 
-- Constrain with \`extends\` so \`keyof\`, indexed access, and editor autocomplete all work at the call site.
-- \`NoInfer<T>\`, new in TypeScript 5.4, stops one parameter from widening the inference: \`function pick<T>(items: T[], fallback: NoInfer<T>)\`.
-- \`satisfies\` checks a value against a type without erasing its literal types, which is what you want for route tables and config objects.
-- Reach for conditional types and \`infer\` only when overloads cannot express the signature. They read worse and type-check slower.`,
+- Restringe con \`extends\` para que \`keyof\`, el acceso indexado y el autocompletado del editor funcionen en el punto de llamada.
+- \`NoInfer<T>\`, nuevo en TypeScript 5.4, impide que un parámetro amplíe la inferencia: \`function pick<T>(items: T[], fallback: NoInfer<T>)\`.
+- \`satisfies\` comprueba un valor contra un tipo sin borrar sus tipos literales, que es justo lo que quieres en tablas de rutas y objetos de configuración.
+- Recurre a los tipos condicionales y a \`infer\` solo cuando las sobrecargas no puedan expresar la firma. Se leen peor y el chequeo de tipos es más lento.`,
 };
 
 export const INDEXED_CORPUS: readonly CorpusDoc[] = [
@@ -221,9 +179,9 @@ export const INDEXED_CORPUS: readonly CorpusDoc[] = [
   GENERICS,
 ];
 
-export const NO_MATCH_ANSWER = `Nothing in the indexed corpus covers that yet, so there is no grounded answer to give.
+export const NO_MATCH_ANSWER = `Todavía no hay nada en el corpus indexado sobre eso, así que no puedo dar una respuesta fundamentada.
 
-The knowledge base currently holds **Angular 18 signals**, **standalone routing**, **RxJS interop**, and **TypeScript 5.4 generics**. Ask about one of those, or use **Add Doc** to index a markdown file and make it retrievable.`;
+Ahora mismo la base de conocimiento cubre **signals de Angular 18**, **rutas standalone**, **interoperabilidad con RxJS** y **genéricos de TypeScript 5.4**. Pregunta por alguno de esos temas, o usa **Añadir doc** para indexar un archivo markdown y dejarlo consultable.`;
 
 export type ScoredDoc = {
   file: string;
@@ -245,20 +203,41 @@ const NOTHING: Retrieval = { doc: null, match: 0, hits: 0, scores: [] };
 
 const TOKEN_RE = /[a-z0-9+#]+/g;
 
+const DIACRITICS_RE = /[\u0300-\u036f]/g;
+
+/**
+ * Fold accents so "genéricos" and "genericos" are the same token, and "ñ"
+ * survives as "n". Applied to both the question and the indexed terms, so
+ * terms can be written naturally with accents.
+ */
+function normalize(text: string): string {
+  return text.toLowerCase().normalize("NFD").replace(DIACRITICS_RE, "");
+}
+
 const STOP_WORDS = new Set([
+  // English
   "a", "an", "and", "the", "to", "of", "in", "on", "for", "with", "how",
   "do", "does", "i", "is", "are", "what", "why", "when", "use", "using", "can",
   "my", "me", "you", "it", "this", "that", "about", "please", "explain", "tell",
   "should", "best", "way", "between", "vs", "or", "be", "not", "get", "make",
+  // Spanish (already accent-folded)
+  "el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "en",
+  "con", "para", "por", "que", "como", "cual", "cuales", "cuando", "donde",
+  "y", "o", "al", "se", "su", "sus", "mi", "mis", "lo", "le", "les", "es",
+  "son", "esta", "este", "esto", "estos", "estas", "ese", "esa", "eso",
+  "usar", "uso", "usan", "hacer", "hago", "puedo", "puede", "podria",
+  "explica", "explicar", "dime", "sobre", "entre", "mas", "mejor", "forma",
+  "manera", "quiero", "necesito", "tengo", "hay", "ser", "si", "no", "me",
 ]);
 
-/** doc.id → its terms as a Set, so scoring is O(1) per token. */
+/** doc.id → its normalized terms as a Set, so scoring is O(1) per token. */
 const TERM_SETS = new Map<string, Set<string>>();
 
 function termsFor(doc: CorpusDoc): Set<string> {
   let set = TERM_SETS.get(doc.id);
   if (set === undefined) {
-    set = new Set(doc.terms);
+    set = new Set<string>();
+    for (const term of doc.terms) set.add(normalize(term));
     TERM_SETS.set(doc.id, set);
   }
   return set;
@@ -266,7 +245,9 @@ function termsFor(doc: CorpusDoc): Set<string> {
 
 function matches(terms: Set<string>, token: string): boolean {
   if (terms.has(token)) return true;
-  // Cheap plural handling, so "subscriptions" still finds "subscription".
+  // Cheap plural handling for both languages: "subscriptions" finds
+  // "subscription", and "senales" finds "senal".
+  if (token.endsWith("es") && terms.has(token.slice(0, -2))) return true;
   return token.endsWith("s") && terms.has(token.slice(0, -1));
 }
 
@@ -274,7 +255,7 @@ export function retrieve(
   question: string,
   docs: readonly CorpusDoc[],
 ): Retrieval {
-  const tokens = question.toLowerCase().match(TOKEN_RE);
+  const tokens = normalize(question).match(TOKEN_RE);
   if (tokens === null) return NOTHING;
 
   const meaningful: string[] = [];
@@ -325,7 +306,7 @@ const WORD_RE = /\S+/g;
 
 /** Turn an uploaded markdown file into something retrievable. */
 export function indexLocalDoc(fileName: string, text: string): CorpusDoc {
-  const words = text.toLowerCase().match(TOKEN_RE) ?? [];
+  const words = normalize(text).match(TOKEN_RE) ?? [];
   const counts = new Map<string, number>();
   for (const word of words) {
     if (word.length < 4 || STOP_WORDS.has(word)) continue;
@@ -338,7 +319,7 @@ export function indexLocalDoc(fileName: string, text: string): CorpusDoc {
   }
 
   const stem = fileName.replace(/\.[^.]+$/, "");
-  for (const part of stem.toLowerCase().split(/[^a-z0-9]+/)) {
+  for (const part of normalize(stem).split(/[^a-z0-9]+/)) {
     if (part.length > 1) terms.push(part);
   }
 
@@ -349,11 +330,11 @@ export function indexLocalDoc(fileName: string, text: string): CorpusDoc {
     id: `local-${stem}-${Date.now()}`,
     file: fileName,
     title: stem.replace(/[-_]+/g, " "),
-    summary: `${wordCount.toLocaleString("en-US")} words, added in this session.`,
+    summary: `${wordCount.toLocaleString("es-MX")} palabras, añadido en esta sesión.`,
     origin: "local",
     terms,
     chunks: [{ section: "excerpt" }],
-    answer: `From **${fileName}**, the doc you added to the corpus:\n\n${excerpt}${
+    answer: `De **${fileName}**, el doc que añadiste al corpus:\n\n${excerpt}${
       text.length > 700 ? "…" : ""
     }`,
   };

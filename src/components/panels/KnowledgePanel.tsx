@@ -10,11 +10,11 @@ export function KnowledgePanel() {
   return (
     <div className={styles.view}>
       <header className={styles.viewHead}>
-        <h2 className={styles.viewTitle}>Indexed corpus</h2>
+        <h2 className={styles.viewTitle}>Corpus indexado</h2>
         <p className={styles.viewLead}>
-          Every answer in Chat Tutor is drawn from one of these files and cites
-          the section it came from. Use <strong>Add Doc</strong> to index a
-          markdown file for this session — it becomes retrievable immediately.
+          Cada respuesta del tutor sale de uno de estos archivos y cita la
+          sección de la que procede. Usa <strong>Añadir doc</strong> para indexar
+          un archivo markdown en esta sesión: queda consultable de inmediato.
         </p>
       </header>
 
@@ -31,7 +31,7 @@ export function KnowledgePanel() {
                     : styles.docTag
                 }
               >
-                {doc.origin}
+                {doc.origin === "local" ? "local" : "indexado"}
               </span>
             </div>
 

@@ -24,7 +24,7 @@ function MessageItemBase({ message }: { message: ChatMessage }) {
       >
         <div className={styles.bubbleHead}>
           <span className={styles.author}>
-            {isUser ? "You" : "DevTutor Bot (Llama + RAG)"}
+            {isUser ? "Tú" : "DevTutor Bot (Llama + RAG)"}
           </span>
           <span className={styles.time}>{message.time}</span>
         </div>
@@ -35,7 +35,7 @@ function MessageItemBase({ message }: { message: ChatMessage }) {
 
         {message.citations.length > 0 ? (
           <div className={styles.cites}>
-            <span className={styles.citesLabel}>Grounded in</span>
+            <span className={styles.citesLabel}>Fundamentado en</span>
             {message.citations.map((citation) => (
               <span key={citation.section} className={styles.cite}>
                 <DocIcon className={styles.citeIcon} />
@@ -44,7 +44,7 @@ function MessageItemBase({ message }: { message: ChatMessage }) {
               </span>
             ))}
             <span className={styles.citeScore}>
-              match {message.match.toFixed(2)}
+              coincidencia {message.match.toFixed(2)}
             </span>
           </div>
         ) : null}
